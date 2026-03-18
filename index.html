@@ -567,13 +567,13 @@
     });
   });
 
-  // Payment
+  // Payment — PayU
   async function initiatePayment() {
-    const name  = document.getElementById('custName').value.trim();
-    const email = document.getElementById('custEmail').value.trim();
-    const phone = document.getElementById('custPhone').value.trim();
-    const dob   = document.getElementById('custDob').value;
-    const btn   = document.getElementById('payBtn');
+    const name   = document.getElementById('custName').value.trim();
+    const email  = document.getElementById('custEmail').value.trim();
+    const phone  = document.getElementById('custPhone').value.trim();
+    const dob    = document.getElementById('custDob').value;
+    const btn    = document.getElementById('payBtn');
     const errBox = document.getElementById('formError');
 
     // Validation
@@ -595,7 +595,7 @@
     }
 
     btn.disabled = true;
-    btn.textContent = 'Creating order...';
+    btn.textContent = 'Please wait...';
 
     try {
       const res = await fetch('/api/create-order', {
@@ -610,12 +610,35 @@
         throw new Error(data.error || 'Something went wrong. Please try again.');
       }
 
-      // Redirect to Cashfree payment page
-      if (data.payment_url) {
-        window.location.href = data.payment_url;
-      } else {
-        throw new Error('Could not get payment link. Please try again.');
-      }
+      // Build a hidden PayU form and auto-submit it
+      // PayU requires a form POST — cannot use a redirect link
+      const form = document.createElement('form');
+      form.method = 'POST';
+      form.action = data.action;
+
+      const fields = {
+        key:         data.key,
+        txnid:       data.txnId,
+        amount:      data.amount,
+        productinfo: data.productInfo,
+        firstname:   data.name,
+        email:       data.email,
+        phone:       data.phone,
+        surl:        data.surl,
+        furl:        data.furl,
+        hash:        data.hash,
+      };
+
+      Object.entries(fields).forEach(([k, v]) => {
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = k;
+        input.value = v;
+        form.appendChild(input);
+      });
+
+      document.body.appendChild(form);
+      form.submit(); // redirects user to PayU payment page
 
     } catch (err) {
       errBox.textContent = err.message;
