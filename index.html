@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -312,6 +313,57 @@
   .footer-links a { font-size: .78rem; color: rgba(255,255,255,.4); text-decoration: none; transition: color .2s; }
   .footer-links a:hover { color: var(--gold-light); }
 
+  /* ── ORDER FORM ── */
+  .order-form-wrap {
+    background: #fff;
+    border: 1px solid rgba(255,255,255,.2);
+    border-radius: 12px;
+    padding: 36px 40px;
+    max-width: 480px;
+    margin: 0 auto;
+    box-shadow: 0 8px 32px rgba(0,0,0,.2);
+  }
+  .order-form-wrap h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem; font-weight: 700;
+    color: var(--text); margin-bottom: 6px; text-align: center;
+  }
+  .form-sub { font-size: .82rem; color: var(--text-mid); text-align: center; margin-bottom: 24px; }
+  .form-group { margin-bottom: 16px; }
+  .form-group label {
+    display: block; font-size: .82rem; font-weight: 600;
+    color: var(--text-mid); margin-bottom: 6px;
+  }
+  .form-group input {
+    width: 100%; padding: 12px 14px;
+    border: 1.5px solid var(--border); border-radius: 6px;
+    font-size: .9rem; font-family: 'Poppins', sans-serif;
+    color: var(--text); outline: none;
+    transition: border-color .2s;
+  }
+  .form-group input:focus { border-color: var(--purple-soft); }
+  .form-group input::placeholder { color: var(--text-light); }
+  .pay-btn {
+    width: 100%; padding: 15px;
+    background: var(--gold); color: var(--purple-deep);
+    border: none; border-radius: 4px;
+    font-size: .95rem; font-weight: 700;
+    cursor: pointer; font-family: 'Poppins', sans-serif;
+    letter-spacing: .03em;
+    box-shadow: 0 4px 18px rgba(200,151,58,.4);
+    transition: background .2s, transform .2s;
+    margin-top: 8px;
+  }
+  .pay-btn:hover { background: var(--gold-light); transform: translateY(-1px); }
+  .pay-btn:disabled { opacity: .65; cursor: not-allowed; transform: none; }
+  .form-note { font-size: .75rem; color: var(--text-light); text-align: center; margin-top: 12px; }
+  .form-error {
+    background: #fef2f2; border: 1px solid #fca5a5;
+    color: #b91c1c; border-radius: 6px;
+    padding: 10px 14px; font-size: .83rem;
+    margin-bottom: 14px; display: none;
+  }
+
   /* ── FLOAT BTN ── */
   .float-btn {
     position: fixed; bottom: 22px; right: 22px; z-index: 200;
@@ -454,17 +506,42 @@
   </div>
 </section>
 
-<!-- FINAL CTA -->
+<!-- FINAL CTA + ORDER FORM -->
 <section class="final-cta" id="order">
   <h2>Get Your Report <em>Today</em></h2>
   <p>Limited time — ₹999 report now available at just ₹399</p>
-  <div class="price-block" style="margin-bottom: 24px;">
+  <div class="price-block" style="margin-bottom: 32px; position:relative;">
     <span class="price-old">₹999</span>
     <span class="price-new">₹399</span>
     <span class="price-save">60% OFF</span>
   </div>
-  <a href="#" class="cta-btn-w">Order My Report for ₹399</a>
-  <div class="final-note">🔒 Secure form &nbsp;·&nbsp; Confidential &nbsp;·&nbsp; Delivered in 4–5 days</div>
+
+  <!-- ORDER FORM -->
+  <div class="order-form-wrap">
+    <h3>Enter Your Details</h3>
+    <p class="form-sub">We'll use these to prepare your personalised report</p>
+    <div class="form-error" id="formError"></div>
+    <div class="form-group">
+      <label>Full Name *</label>
+      <input type="text" id="custName" placeholder="e.g. Rahul Sharma" />
+    </div>
+    <div class="form-group">
+      <label>Email Address *</label>
+      <input type="email" id="custEmail" placeholder="e.g. rahul@gmail.com" />
+    </div>
+    <div class="form-group">
+      <label>Mobile Number *</label>
+      <input type="tel" id="custPhone" placeholder="e.g. 9876543210" maxlength="10" />
+    </div>
+    <div class="form-group">
+      <label>Date of Birth *</label>
+      <input type="date" id="custDob" />
+    </div>
+    <button class="pay-btn" id="payBtn" onclick="initiatePayment()">
+      Pay ₹399 Securely →
+    </button>
+    <p class="form-note">🔒 Secure payment via Cashfree &nbsp;·&nbsp; UPI, Cards, Netbanking accepted</p>
+  </div>
 </section>
 
 <!-- FOOTER -->
@@ -481,6 +558,7 @@
 <a href="#order" class="float-btn">Order Now — ₹399</a>
 
 <script>
+  // FAQ accordion
   document.querySelectorAll('.faq-item').forEach(item => {
     item.querySelector('.faq-q').addEventListener('click', () => {
       const open = item.classList.contains('open');
@@ -488,6 +566,64 @@
       if (!open) item.classList.add('open');
     });
   });
+
+  // Payment
+  async function initiatePayment() {
+    const name  = document.getElementById('custName').value.trim();
+    const email = document.getElementById('custEmail').value.trim();
+    const phone = document.getElementById('custPhone').value.trim();
+    const dob   = document.getElementById('custDob').value;
+    const btn   = document.getElementById('payBtn');
+    const errBox = document.getElementById('formError');
+
+    // Validation
+    errBox.style.display = 'none';
+    if (!name || !email || !phone || !dob) {
+      errBox.textContent = 'Please fill in all fields before proceeding.';
+      errBox.style.display = 'block';
+      return;
+    }
+    if (!/^\d{10}$/.test(phone)) {
+      errBox.textContent = 'Please enter a valid 10-digit mobile number.';
+      errBox.style.display = 'block';
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      errBox.textContent = 'Please enter a valid email address.';
+      errBox.style.display = 'block';
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = 'Creating order...';
+
+    try {
+      const res = await fetch('/api/create-order', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, phone, dob }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || 'Something went wrong. Please try again.');
+      }
+
+      // Redirect to Cashfree payment page
+      if (data.payment_url) {
+        window.location.href = data.payment_url;
+      } else {
+        throw new Error('Could not get payment link. Please try again.');
+      }
+
+    } catch (err) {
+      errBox.textContent = err.message;
+      errBox.style.display = 'block';
+      btn.disabled = false;
+      btn.textContent = 'Pay ₹399 Securely →';
+    }
+  }
 </script>
 </body>
 </html>
