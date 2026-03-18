@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Personalized Numerology Report — ₹399</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --purple:      #5C2D91;
+    --purple-dark: #3D1A6E;
+    --purple-deep: #2A0F52;
+    --purple-soft: #7B4DB5;
+    --purple-pale: #F3EEF9;
+    --purple-mid:  #EAE0F5;
+    --gold:        #C8973A;
+    --gold-light:  #E8BC6A;
+    --gold-pale:   #FDF6E7;
+    --indigo:      #1E2D6B;
+    --white:       #FFFFFF;
+    --text:        #1A0F2E;
+    --text-mid:    #4A3870;
+    --text-light:  #8A7AA8;
+    --border:      #DDD0EE;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    color: var(--text);
+    background: var(--white);
+    overflow-x: hidden;
+    line-height: 1.7;
+  }
+
+  /* ── NAV ── */
+  nav {
+    background: var(--purple-deep);
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 16px 52px;
+    position: sticky; top: 0; z-index: 100;
+    box-shadow: 0 2px 16px rgba(44,15,82,.4);
+  }
+  .logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.35rem; font-weight: 700;
+    color: var(--gold-light);
+    letter-spacing: .04em;
+  }
+  .logo span { color: rgba(255,255,255,.6); font-size: .75rem; display: block; letter-spacing: .12em; font-family: 'Poppins', sans-serif; font-weight: 400; margin-top: -2px; }
+  .nav-btn {
+    background: var(--gold);
+    color: var(--purple-deep);
+    padding: 10px 26px;
+    font-size: .82rem; font-weight: 600;
+    text-decoration: none; border-radius: 3px;
+    transition: background .2s;
+    letter-spacing: .03em;
+  }
+  .nav-btn:hover { background: var(--gold-light); }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(160deg, var(--purple-deep) 0%, var(--purple) 60%, var(--indigo) 100%);
+    padding: 72px 24px 64px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  /* subtle star dots */
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      radial-gradient(1px 1px at 12% 20%, rgba(255,255,255,.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 28% 65%, rgba(255,255,255,.3) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 52% 18%, rgba(255,255,255,.35) 0%, transparent 100%),
+      radial-gradient(1px 1px at 70% 75%, rgba(255,255,255,.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 88% 35%, rgba(255,255,255,.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 42% 85%, rgba(255,255,255,.25) 0%, transparent 100%),
+      radial-gradient(1px 1px at 95% 60%, rgba(255,255,255,.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 5% 80%, rgba(255,255,255,.3) 0%, transparent 100%);
+    pointer-events: none;
+  }
+
+  .hero-tag {
+    display: inline-block;
+    border: 1px solid rgba(200,151,58,.5);
+    color: var(--gold-light);
+    font-size: .72rem; font-weight: 500; letter-spacing: .14em;
+    padding: 6px 18px; border-radius: 20px;
+    margin-bottom: 22px;
+    position: relative;
+  }
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 5vw, 3.8rem);
+    font-weight: 700; line-height: 1.15;
+    color: var(--white); max-width: 720px;
+    margin: 0 auto 18px;
+    position: relative;
+  }
+  .hero h1 em { color: var(--gold-light); font-style: italic; }
+  .hero-sub {
+    font-size: .97rem; color: rgba(255,255,255,.72);
+    max-width: 500px; margin: 0 auto 36px;
+    line-height: 1.8; position: relative;
+  }
+
+  .price-block {
+    display: flex; align-items: center; justify-content: center;
+    gap: 14px; margin-bottom: 24px; position: relative;
+  }
+  .price-old { font-size: 1rem; text-decoration: line-through; color: rgba(255,255,255,.4); }
+  .price-new {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.6rem; font-weight: 700;
+    color: var(--gold-light);
+  }
+  .price-save {
+    background: var(--gold);
+    color: var(--purple-deep);
+    font-size: .72rem; font-weight: 700;
+    padding: 5px 13px; border-radius: 20px;
+    letter-spacing: .04em;
+  }
+
+  .cta-btn {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--purple-deep);
+    padding: 17px 52px; border-radius: 3px;
+    font-size: .92rem; font-weight: 700;
+    text-decoration: none; letter-spacing: .04em;
+    box-shadow: 0 6px 24px rgba(200,151,58,.4);
+    transition: background .2s, transform .2s;
+    margin-bottom: 18px; position: relative;
+  }
+  .cta-btn:hover { background: var(--gold-light); transform: translateY(-2px); }
+  .hero-note { font-size: .76rem; color: rgba(255,255,255,.45); position: relative; }
+
+  /* ── TRUST BAR ── */
+  .trust-bar {
+    background: var(--purple-pale);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 24px;
+    display: flex; justify-content: center; gap: 36px; flex-wrap: wrap;
+  }
+  .trust-item { font-size: .82rem; color: var(--text-mid); display: flex; align-items: center; gap: 6px; }
+
+  /* ── SECTIONS ── */
+  .section { padding: 64px 24px; }
+  .section.alt { background: var(--purple-pale); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .section.gold-alt { background: var(--gold-pale); border-top: 1px solid #E8D4A0; border-bottom: 1px solid #E8D4A0; }
+  .inner { max-width: 900px; margin: 0 auto; }
+
+  .section-head { text-align: center; margin-bottom: 36px; }
+  .section-head h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.6rem, 3vw, 2.3rem);
+    font-weight: 700; color: var(--text); margin-bottom: 8px;
+  }
+  .section-head p { font-size: .9rem; color: var(--text-mid); max-width: 520px; margin: 0 auto; }
+  .uline { width: 44px; height: 3px; background: var(--gold); border-radius: 2px; margin: 12px auto 0; }
+
+  /* ── CHECKLIST ── */
+  .checklist {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 28px;
+  }
+  .check-item {
+    display: flex; gap: 12px; align-items: flex-start;
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: 6px; padding: 14px 16px;
+    transition: border-color .2s;
+  }
+  .check-item:hover { border-color: var(--purple-soft); }
+  .check-icon {
+    width: 22px; height: 22px; border-radius: 50%;
+    background: var(--purple);
+    color: var(--gold-light); font-size: .68rem;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 2px; font-weight: 700;
+  }
+  .check-item strong { display: block; font-size: .88rem; font-weight: 600; color: var(--text); margin-bottom: 2px; }
+  .check-item span { font-size: .81rem; color: var(--text-mid); line-height: 1.55; }
+
+  /* ── STEPS ── */
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+  .step-card {
+    text-align: center; padding: 28px 18px;
+    background: var(--white); border: 1px solid var(--border); border-radius: 8px;
+    transition: border-color .2s, box-shadow .2s;
+  }
+  .step-card:hover { border-color: var(--purple-soft); box-shadow: 0 4px 16px rgba(92,45,145,.1); }
+  .step-n {
+    width: 48px; height: 48px; border-radius: 50%;
+    background: var(--purple);
+    color: var(--gold-light);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 14px;
+  }
+  .step-card h4 { font-size: .88rem; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+  .step-card p { font-size: .81rem; color: var(--text-mid); line-height: 1.6; }
+
+  /* ── REVIEWS ── */
+  .reviews {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .review {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: 8px; padding: 22px 20px;
+    transition: box-shadow .2s;
+  }
+  .review:hover { box-shadow: 0 4px 18px rgba(92,45,145,.1); }
+  .stars { color: var(--gold); font-size: .9rem; margin-bottom: 10px; letter-spacing: 1px; }
+  .review p { font-size: .84rem; color: var(--text-mid); font-style: italic; line-height: 1.75; margin-bottom: 14px; }
+  .rev-name { font-size: .82rem; font-weight: 600; color: var(--text); }
+  .rev-city { font-size: .76rem; color: var(--text-light); }
+
+  /* ── FAQ ── */
+  .faq-list { max-width: 680px; margin: 0 auto; }
+  .faq-item {
+    border: 1px solid var(--border); border-radius: 6px;
+    margin-bottom: 8px; overflow: hidden; background: var(--white);
+    cursor: pointer;
+  }
+  .faq-q {
+    padding: 15px 18px; font-size: .88rem; font-weight: 500; color: var(--text);
+    display: flex; justify-content: space-between; align-items: center;
+    user-select: none; gap: 12px;
+  }
+  .faq-arr {
+    color: var(--purple); font-size: 1.3rem; font-weight: 700;
+    transition: transform .3s; flex-shrink: 0; line-height: 1;
+  }
+  .faq-item.open .faq-arr { transform: rotate(45deg); }
+  .faq-a {
+    font-size: .84rem; color: var(--text-mid); line-height: 1.75;
+    max-height: 0; overflow: hidden;
+    transition: max-height .35s ease, padding .3s;
+    padding: 0 18px;
+  }
+  .faq-item.open .faq-a { max-height: 160px; padding: 0 18px 14px; border-top: 1px solid var(--border); }
+
+  /* ── FINAL CTA ── */
+  .final-cta {
+    background: linear-gradient(135deg, var(--purple-deep), var(--purple), var(--indigo));
+    padding: 72px 24px;
+    text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .final-cta::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      radial-gradient(1px 1px at 20% 30%, rgba(255,255,255,.35) 0%, transparent 100%),
+      radial-gradient(1px 1px at 80% 20%, rgba(255,255,255,.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 55% 75%, rgba(255,255,255,.25) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 10% 70%, rgba(255,255,255,.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 90% 80%, rgba(255,255,255,.25) 0%, transparent 100%);
+    pointer-events: none;
+  }
+  .final-cta h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    font-weight: 700; color: var(--white); margin-bottom: 10px;
+    position: relative;
+  }
+  .final-cta h2 em { color: var(--gold-light); font-style: italic; }
+  .final-cta p { font-size: .95rem; color: rgba(255,255,255,.72); margin-bottom: 30px; position: relative; }
+  .final-cta .price-block { position: relative; }
+  .cta-btn-w {
+    display: inline-block;
+    background: var(--gold); color: var(--purple-deep);
+    padding: 17px 52px; border-radius: 3px;
+    font-size: .92rem; font-weight: 700;
+    text-decoration: none; letter-spacing: .04em;
+    box-shadow: 0 6px 24px rgba(200,151,58,.4);
+    transition: background .2s, transform .2s;
+    margin-bottom: 14px; position: relative;
+  }
+  .cta-btn-w:hover { background: var(--gold-light); transform: translateY(-2px); }
+  .final-note { font-size: .76rem; color: rgba(255,255,255,.4); position: relative; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--purple-deep);
+    padding: 28px 48px;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 16px;
+    border-top: 1px solid rgba(200,151,58,.25);
+  }
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem; font-weight: 700;
+    color: var(--gold-light);
+  }
+  .footer-links { display: flex; gap: 22px; flex-wrap: wrap; }
+  .footer-links a { font-size: .78rem; color: rgba(255,255,255,.4); text-decoration: none; transition: color .2s; }
+  .footer-links a:hover { color: var(--gold-light); }
+
+  /* ── FLOAT BTN ── */
+  .float-btn {
+    position: fixed; bottom: 22px; right: 22px; z-index: 200;
+    background: var(--gold); color: var(--purple-deep);
+    padding: 12px 24px; border-radius: 3px;
+    font-size: .82rem; font-weight: 700;
+    text-decoration: none; letter-spacing: .03em;
+    box-shadow: 0 4px 18px rgba(200,151,58,.45);
+    transition: background .2s;
+    animation: popIn .5s 2s both;
+  }
+  .float-btn:hover { background: var(--gold-light); }
+  @keyframes popIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 760px) {
+    nav { padding: 14px 20px; }
+    .checklist { grid-template-columns: 1fr; }
+    .steps { grid-template-columns: 1fr 1fr; }
+    .reviews { grid-template-columns: 1fr; }
+    footer { flex-direction: column; text-align: center; padding: 24px; }
+  }
+  @media (max-width: 500px) {
+    .steps { grid-template-columns: 1fr; }
+    .trust-bar { gap: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">
+    Cosmic Numbers
+    <span>Personalized Numerology</span>
+  </div>
+  <a href="#order" class="nav-btn">Get Report — ₹399</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <span class="hero-tag">✦ 5,000+ Reports Delivered</span>
+  <h1>Know Your <em>Destiny</em><br>Through Numerology</h1>
+  <p class="hero-sub">A deeply personal numerology report built from your Date of Birth, Name & Mobile Number — delivered to your WhatsApp in 4–5 days.</p>
+  <div class="price-block">
+    <span class="price-old">₹999</span>
+    <span class="price-new">₹399</span>
+    <span class="price-save">60% OFF</span>
+  </div>
+  <a href="#order" class="cta-btn">Get My Numerology Report →</a>
+  <div class="hero-note">🔒 Confidential &nbsp;·&nbsp; PDF in Hindi or English &nbsp;·&nbsp; Crafted by expert numerologists</div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-item">✅ Handcrafted — not automated</div>
+  <div class="trust-item">📲 WhatsApp & Email delivery</div>
+  <div class="trust-item">🇮🇳 Hindi & English available</div>
+  <div class="trust-item">🔒 Your data stays private</div>
+</div>
+
+<!-- WHAT'S INSIDE -->
+<section class="section">
+  <div class="inner">
+    <div class="section-head">
+      <h2>What's Inside Your Report</h2>
+      <p>A complete picture of your numbers, your life path, and what lies ahead.</p>
+      <div class="uline"></div>
+    </div>
+    <div class="checklist">
+      <div class="check-item"><span class="check-icon">✓</span><div><strong>Life Path & Destiny Numbers</strong><span>Moolank & Bhagyank — your core numerological identity.</span></div></div>
+      <div class="check-item"><span class="check-icon">✓</span><div><strong>5-Year Life Forecast</strong><span>Year-by-year outlook for career, relationships & finances.</span></div></div>
+      <div class="check-item"><span class="check-icon">✓</span><div><strong>Name & Mobile Number Analysis</strong><span>The hidden energy in your name and phone number.</span></div></div>
+      <div class="check-item"><span class="check-icon">✓</span><div><strong>Challenges & Practical Remedies</strong><span>Simple, actionable steps to overcome your obstacles.</span></div></div>
+      <div class="check-item"><span class="check-icon">✓</span><div><strong>Lo Shu Grid & Raj Yoga</strong><span>Advanced analysis of your life energy and success periods.</span></div></div>
+      <div class="check-item"><span class="check-icon">✓</span><div><strong>12-Month Predictions</strong><span>Month-by-month guidance for the year ahead.</span></div></div>
+      <div class="check-item"><span class="check-icon">✓</span><div><strong>Love & Career Guidance</strong><span>Compatibility insights and ideal career directions.</span></div></div>
+      <div class="check-item"><span class="check-icon">✓</span><div><strong>Karmic Debt Reading</strong><span>Understand past patterns and how to move forward.</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section alt">
+  <div class="inner">
+    <div class="section-head">
+      <h2>How It Works</h2>
+      <p>Four simple steps from order to delivery.</p>
+      <div class="uline"></div>
+    </div>
+    <div class="steps">
+      <div class="step-card"><div class="step-n">1</div><h4>Place Your Order</h4><p>Fill the secure form with your name, DOB & mobile number.</p></div>
+      <div class="step-card"><div class="step-n">2</div><h4>Expert Analysis</h4><p>Our numerologists personally study your details.</p></div>
+      <div class="step-card"><div class="step-n">3</div><h4>Report Is Created</h4><p>A detailed, personalised PDF report is prepared for you.</p></div>
+      <div class="step-card"><div class="step-n">4</div><h4>You Receive It</h4><p>Delivered to WhatsApp & email in 4–5 working days.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section gold-alt">
+  <div class="inner">
+    <div class="section-head">
+      <h2>What People Are Saying</h2>
+      <div class="uline"></div>
+    </div>
+    <div class="reviews">
+      <div class="review"><div class="stars">★★★★★</div><p>"The analysis was spot-on. My business has improved significantly since following the remedies. Highly recommended!"</p><div class="rev-name">Rajesh Mehta</div><div class="rev-city">Delhi</div></div>
+      <div class="review"><div class="stars">★★★★★</div><p>"Career guidance helped me land my dream job. The relationship advice improved my marriage too. Life-changing!"</p><div class="rev-name">Priya Sharma</div><div class="rev-city">Mumbai</div></div>
+      <div class="review"><div class="stars">★★★★★</div><p>"Was stuck for years. Within months of following the advice, I got promoted and a salary hike. Worth every rupee."</p><div class="rev-name">Vikram Singh</div><div class="rev-city">Bangalore</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section alt">
+  <div class="inner">
+    <div class="section-head">
+      <h2>Common Questions</h2>
+      <div class="uline"></div>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q">When will I receive my report? <span class="faq-arr">+</span></div>
+        <div class="faq-a">Within 4–5 working days via WhatsApp and Email. Check your Spam folder if you don't see it.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Is this automated or AI-generated? <span class="faq-arr">+</span></div>
+        <div class="faq-a">No — our expert numerologists personally analyze your details and write the report themselves.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">What information do I need to give? <span class="faq-arr">+</span></div>
+        <div class="faq-a">Your full name, active mobile number, and complete date of birth. Accurate details give the best results.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Can I order for someone else? <span class="faq-arr">+</span></div>
+        <div class="faq-a">Yes. Just provide their name, mobile number, and date of birth. Makes a thoughtful gift too.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta" id="order">
+  <h2>Get Your Report <em>Today</em></h2>
+  <p>Limited time — ₹999 report now available at just ₹399</p>
+  <div class="price-block" style="margin-bottom: 24px;">
+    <span class="price-old">₹999</span>
+    <span class="price-new">₹399</span>
+    <span class="price-save">60% OFF</span>
+  </div>
+  <a href="#" class="cta-btn-w">Order My Report for ₹399</a>
+  <div class="final-note">🔒 Secure form &nbsp;·&nbsp; Confidential &nbsp;·&nbsp; Delivered in 4–5 days</div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-logo">✦ Cosmic Numbers</span>
+  <div class="footer-links">
+    <a href="#">Privacy Policy</a>
+    <a href="#">Disclaimer</a>
+    <a href="#">Refund Policy</a>
+    <a href="#">Support</a>
+  </div>
+</footer>
+
+<a href="#order" class="float-btn">Order Now — ₹399</a>
+
+<script>
+  document.querySelectorAll('.faq-item').forEach(item => {
+    item.querySelector('.faq-q').addEventListener('click', () => {
+      const open = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!open) item.classList.add('open');
+    });
+  });
+</script>
+</body>
+</html>
