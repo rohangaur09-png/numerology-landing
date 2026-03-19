@@ -8,6 +8,24 @@
 <!-- This allows the page to load even when PayU POSTs to it -->
 <meta http-equiv="Content-Security-Policy" content="form-action *;">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<!-- Meta Pixel -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1332282788942150');
+fbq('track', 'PageView');
+fbq('track', 'Purchase', {
+  value: 399,
+  currency: 'INR',
+  content_name: 'Personalized Numerology Report',
+  content_type: 'product'
+});
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1332282788942150&ev=PageView&noscript=1"/></noscript>
+<!-- End Meta Pixel -->
 <style>
   :root {
     --purple:      #5C2D91;
@@ -164,7 +182,7 @@
     <div class="info-box">
       <p><span class="dot"></span>You will receive your report via <strong>WhatsApp and Email</strong> within 4–5 working days.</p>
       <p><span class="dot"></span>Please check your <strong>Spam / Promotions folder</strong> if you don't see it in your inbox.</p>
-      <p><span class="dot"></span>For any queries, reach us at <strong>support@grahaveda.com</strong></p>
+      <p><span class="dot"></span>For any queries, reach us at <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ee9d9b9e9e819c9aae899c8f868f988b8a8fc08d8183">[email&#160;protected]</a></strong></p>
     </div>
 
     <p class="order-id">Order ID: <span id="orderId">—</span></p>
@@ -177,7 +195,7 @@
   <p>© 2025 GrahaVeda. All rights reserved.</p>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   // Handle both GET params and PayU POST params
   // PayU posts txnid, status, amount etc. to this page
   const params = new URLSearchParams(window.location.search);
@@ -196,10 +214,4 @@
   const status = params.get('status');
   if (status === 'failed' || status === 'failure') {
     document.querySelector('h1').innerHTML = 'Payment <em>Failed</em>';
-    document.querySelector('.subtitle').textContent = 'Something went wrong with your payment. Please try again.';
-    document.querySelector('.check-circle').textContent = '✕';
-    document.querySelector('.check-circle').style.background = '#dc2626';
-  }
-</script>
-</body>
-</html>
+    document.querySelector('.subtitle').textContent 
