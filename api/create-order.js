@@ -18,7 +18,7 @@ export default async function handler(req, res) {
   const productInfo = 'Personalized Numerology Report';
   const key = process.env.PAYU_MERCHANT_KEY;
   const salt = process.env.PAYU_SALT;
-  const surl = `${process.env.SITE_URL}/thank-you.html`;
+  const surl = `${process.env.SITE_URL}/thank-you.html?order_id=${txnId}&status=success`;
   const furl = `${process.env.SITE_URL}/?payment=failed`;
 
   // PayU hash formula
