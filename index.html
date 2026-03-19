@@ -641,4 +641,12 @@
       form.submit(); // redirects user to PayU payment page
 
     } catch (err) {
-      errBox.textContent = err.message
+      errBox.textContent = err.message;
+      errBox.style.display = 'block';
+      btn.disabled = false;
+      btn.textContent = 'Pay ₹399 Securely →';
+    }
+  }
+</script>
+</body>
+</html>
