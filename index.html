@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Personalized Numerology Report — ₹399</title>
+<title>GrahaVeda — Personalized Numerology Report</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -396,9 +396,10 @@
 
 <!-- NAV -->
 <nav>
-  <a href="/">
-  <img src="/grahaveda-logo.svg" alt="GrahaVeda" height="44">
-</a>
+  <div class="logo">
+    ✦ GrahaVeda
+    <span>Ancient Wisdom · Cosmic Guidance</span>
+  </div>
   <a href="#order" class="nav-btn">Get Report — ₹399</a>
 </nav>
 
@@ -545,18 +546,18 @@
 
 <!-- FOOTER -->
 <footer>
-  <span class="footer-logo">✦ Cosmic Numbers</span>
+  <span class="footer-logo">✦ GrahaVeda</span>
   <div class="footer-links">
     <a href="/privacy-policy.html">Privacy Policy</a>
     <a href="/disclaimer.html">Disclaimer</a>
     <a href="/refund-policy.html">Refund Policy</a>
-    <a href="mailto:support@cosmicnumbers.in">Support</a>
+    <a href="/cdn-cgi/l/email-protection#32414742425d404672515d415f5b515c475f505740411c5b5c">Support</a>
   </div>
 </footer>
 
 <a href="#order" class="float-btn">Order Now — ₹399</a>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   // FAQ accordion
   document.querySelectorAll('.faq-item').forEach(item => {
     item.querySelector('.faq-q').addEventListener('click', () => {
@@ -640,12 +641,4 @@
       form.submit(); // redirects user to PayU payment page
 
     } catch (err) {
-      errBox.textContent = err.message;
-      errBox.style.display = 'block';
-      btn.disabled = false;
-      btn.textContent = 'Pay ₹399 Securely →';
-    }
-  }
-</script>
-</body>
-</html>
+      errBox.textContent = err.message
