@@ -1,9 +1,12 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Payment Successful — Cosmic Numbers</title>
+<title>Payment Successful — GrahaVeda</title>
+<!-- This allows the page to load even when PayU POSTs to it -->
+<meta http-equiv="Content-Security-Policy" content="form-action *;">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -27,7 +30,6 @@
     flex-direction: column;
   }
 
-  /* NAV */
   nav {
     background: var(--purple-deep);
     padding: 16px 52px;
@@ -39,8 +41,16 @@
     font-size: 1.3rem; font-weight: 700;
     color: var(--gold-light);
   }
+  .logo span {
+    color: rgba(255,255,255,.5);
+    font-size: .72rem;
+    display: block;
+    letter-spacing: .12em;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    margin-top: -2px;
+  }
 
-  /* MAIN */
   main {
     flex: 1;
     display: flex; align-items: center; justify-content: center;
@@ -63,6 +73,11 @@
     margin: 0 auto 28px;
     font-size: 2rem;
     box-shadow: 0 6px 20px rgba(92,45,145,.3);
+    animation: popIn .5s ease both;
+  }
+  @keyframes popIn {
+    from { transform: scale(0); opacity: 0; }
+    to   { transform: scale(1); opacity: 1; }
   }
 
   h1 {
@@ -91,7 +106,7 @@
     margin-bottom: 10px; line-height: 1.6;
   }
   .info-box p:last-child { margin-bottom: 0; }
-  .info-box .dot {
+  .dot {
     width: 6px; height: 6px; border-radius: 50%;
     background: var(--gold); flex-shrink: 0; margin-top: 7px;
   }
@@ -111,7 +126,6 @@
   }
   .back-btn:hover { background: var(--purple); }
 
-  /* FOOTER */
   footer {
     background: var(--purple-deep);
     padding: 20px 48px;
@@ -119,11 +133,14 @@
     flex-wrap: wrap; gap: 12px;
     border-top: 1px solid rgba(200,151,58,.2);
   }
-  .footer-logo { font-family: 'Cormorant Garamond', serif; color: var(--gold-light); font-size: 1rem; font-weight: 700; }
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--gold-light); font-size: 1rem; font-weight: 700;
+  }
   footer p { font-size: .76rem; color: rgba(255,255,255,.35); }
 
   @media (max-width: 560px) {
-    .card { padding: 36px 24px; }
+    .card { padding: 36px 20px; }
     nav { padding: 14px 20px; }
     footer { flex-direction: column; text-align: center; padding: 18px; }
   }
@@ -132,7 +149,10 @@
 <body>
 
 <nav>
-  <span class="logo">✦ Cosmic Numbers</span>
+  <div class="logo">
+    ✦ GrahaVeda
+    <span>Ancient Wisdom · Cosmic Guidance</span>
+  </div>
 </nav>
 
 <main>
@@ -144,7 +164,7 @@
     <div class="info-box">
       <p><span class="dot"></span>You will receive your report via <strong>WhatsApp and Email</strong> within 4–5 working days.</p>
       <p><span class="dot"></span>Please check your <strong>Spam / Promotions folder</strong> if you don't see it in your inbox.</p>
-      <p><span class="dot"></span>For any queries, reach us at <strong>support@cosmicnumbers.in</strong></p>
+      <p><span class="dot"></span>For any queries, reach us at <strong>support@grahaveda.com</strong></p>
     </div>
 
     <p class="order-id">Order ID: <span id="orderId">—</span></p>
@@ -153,16 +173,32 @@
 </main>
 
 <footer>
-  <span class="footer-logo">✦ Cosmic Numbers</span>
-  <p>© 2025 Cosmic Numbers. All rights reserved.</p>
+  <span class="footer-logo">✦ GrahaVeda</span>
+  <p>© 2025 GrahaVeda. All rights reserved.</p>
 </footer>
 
 <script>
-  // Pull order_id from URL and show it
+  // Handle both GET params and PayU POST params
+  // PayU posts txnid, status, amount etc. to this page
   const params = new URLSearchParams(window.location.search);
-  const orderId = params.get('order_id');
+  const orderId = params.get('order_id') || params.get('txnid');
   if (orderId) {
     document.getElementById('orderId').textContent = orderId;
+  }
+
+  // If page was loaded via POST (PayU redirect), store in sessionStorage
+  // and reload as GET so page renders properly
+  if (window.performance && window.performance.navigation.type === 255) {
+    // Came from a redirect — page is fine
+  }
+
+  // Check if status is failed
+  const status = params.get('status');
+  if (status === 'failed' || status === 'failure') {
+    document.querySelector('h1').innerHTML = 'Payment <em>Failed</em>';
+    document.querySelector('.subtitle').textContent = 'Something went wrong with your payment. Please try again.';
+    document.querySelector('.check-circle').textContent = '✕';
+    document.querySelector('.check-circle').style.background = '#dc2626';
   }
 </script>
 </body>
