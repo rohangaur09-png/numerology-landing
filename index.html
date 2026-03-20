@@ -622,35 +622,12 @@ fbq('track', 'PageView');
         throw new Error(data.error || 'Something went wrong. Please try again.');
       }
 
-      // Build a hidden PayU form and auto-submit it
-      // PayU requires a form POST — cannot use a redirect link
-      const form = document.createElement('form');
-      form.method = 'POST';
-      form.action = data.action;
-
-      const fields = {
-        key:         data.key,
-        txnid:       data.txnId,
-        amount:      data.amount,
-        productinfo: data.productInfo,
-        firstname:   data.name,
-        email:       data.email,
-        phone:       data.phone,
-        surl:        data.surl,
-        furl:        data.furl,
-        hash:        data.hash,
-      };
-
-      Object.entries(fields).forEach(([k, v]) => {
-        const input = document.createElement('input');
-        input.type = 'hidden';
-        input.name = k;
-        input.value = v;
-        form.appendChild(input);
-      });
-
-      document.body.appendChild(form);
-      form.submit(); // redirects user to PayU payment page
+      // Redirect to Cashfree payment page
+      if (data.payment_url) {
+        window.location.href = data.payment_url;
+      } else {
+        throw new Error('Could not get payment link. Please try again.');
+      }
 
     } catch (err) {
       errBox.textContent = err.message;
